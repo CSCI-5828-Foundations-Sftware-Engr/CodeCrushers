@@ -32,4 +32,5 @@ https://csci5828-codecrushers.atlassian.net/jira/software/projects/C5FP/boards/1
 
 
 ### Gantt Chart:
+![image](https://user-images.githubusercontent.com/72016598/227111708-27ace4ff-1e8d-4df0-a058-fa7ed62410b0.png)
 
