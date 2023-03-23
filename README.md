@@ -1,9 +1,9 @@
 # Team Name: CodeCrushers
 ### Team Members: 
-Heet Vora
-Nishee Shelat
-Noah James
-Surya Kanteti
+- Heet Vora
+- Nishee Shelat
+- Noah James
+- Surya Kanteti
 
 ### Public Accessible URL :
 https://codecrushers.herokuapp.com/
@@ -31,5 +31,5 @@ https://csci5828-codecrushers.atlassian.net/jira/software/projects/C5FP/boards/1
 ![image](https://user-images.githubusercontent.com/72016598/227109817-2f23b3aa-4425-488f-a4cf-98d4725fe3ed.png)
 
 
-### Gantt Chart
+### Gantt Chart:
 
