@@ -16,10 +16,12 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
+
 @app.route('/', methods=['POST', 'GET'])
 def home():
     # Always render home template
     return render_template('home.html')
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -27,7 +29,7 @@ def login():
         if session['user']:
             email = request.form.get('email')
             password = request.form.get('password')
-            #user = auth.sign_in_with_email_and_password(email, password)
+            # user = auth.sign_in_with_email_and_password(email, password)
             if email == session['user']:
                 return render_template('home.html')
             else:
@@ -48,10 +50,10 @@ def signup():
             print("Got password:" + password)
             session['user'] = email
             session['password'] = password
-            #new_user = auth.create_user_with_email_and_password(email, password)
+            # new_user = auth.create_user_with_email_and_password(email, password)
             return render_template('home.html')
         except:
-            return 'Cant sign in'
+            return 'Cant sign up'
 
     return render_template('signup.html')
 
@@ -63,6 +65,16 @@ def logout():
         print("Removed user: " + user_removed)
 
     return redirect('/')
+
+
+@app.route('/browse', methods=['GET'])
+def browse():
+    return render_template('browse.html')
+
+
+@app.route('/course', methods=['GET'])
+def course():
+    return render_template('course.html')
 
 
 if __name__ == '__main__':

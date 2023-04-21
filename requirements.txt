@@ -23,6 +23,7 @@ pycparser==2.21
 pycryptodome==3.17
 pyparsing==3.0.9
 Pyrebase4==4.6.0
+pytest==7.3.1
 python-jwt==4.0.0
 requests==2.28.2
 requests-toolbelt==0.10.1
