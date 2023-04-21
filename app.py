@@ -1,9 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 import pyrebase
-
-app = Flask(__name__)
-app.secret_key = 'BAD_SECRET_KEY'
-config = {
+app=Flask(__name__)
+config={
     'apiKey': "AIzaSyARXlOfe51cqe05FTXqGenBHVMn4d52hk4",
     'authDomain': "code-crushers-84671.firebaseapp.com",
     'projectId': "code-crushers-84671",
@@ -11,71 +9,41 @@ config = {
     'messagingSenderId': "1053885338598",
     'appId': "1:1053885338598:web:016ba75c29b3124cba7c27",
     'measurementId': "G-LXN6NP5MHW",
-    'databaseURL': ''
+    'databaseURL':''
 }
 firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
+auth=firebase.auth()
 
-
-@app.route('/', methods=['POST', 'GET'])
-def home():
-    # Always render home template
-    return render_template('home.html')
-
-
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/', methods=['POST','GET'])
 def login():
+    if('user' in session):
+        return 'Hi ,{}'.format(session['user'])
     if request.method == 'POST':
-        if session['user']:
-            email = request.form.get('email')
-            password = request.form.get('password')
-            # user = auth.sign_in_with_email_and_password(email, password)
-            if email == session['user']:
-                return render_template('home.html')
-            else:
-                return '<a href="/login">Not a valid user. Return to login.</a>'
-        else:
-            return '<a href="/login">Not a valid user. Return to login.</a>'
+        email=request.form.get('email')
+        password=request.form.get('password')
+        user = auth.sign_in_with_email_and_password(email,password)
+        session['user'] = email
+        return redirect('\home')
+        return render_template('login.html')
 
-    return render_template('login.html')
-
-
-@app.route("/signup", methods=['POST', 'GET'])
+@app.route("/signup", methods=['POST','GET'])
 def signup():
     if request.method == 'POST':
         try:
-            email = request.form.get('email')
-            print("Got email:" + email)
-            password = request.form.get('password')
-            print("Got password:" + password)
-            session['user'] = email
-            session['password'] = password
-            # new_user = auth.create_user_with_email_and_password(email, password)
-            return render_template('home.html')
+            email=request.form.get('email')
+            password=request.form.get('password')
+            new_user = auth.create_user_with_email_and_password(email,password)
+            return redirect('/')
         except:
-            return 'Cant sign up'
-
+            return 'Cant sign in'
+    
     return render_template('signup.html')
 
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route('/logout', methods=['GET','POST'])
 def logout():
-    if session['user']:
-        user_removed = session.pop('user')
-        print("Removed user: " + user_removed)
-
+    x=session.pop('user')
+    print(x)
     return redirect('/')
-
-
-@app.route('/browse', methods=['GET'])
-def browse():
-    return render_template('browse.html')
-
-
-@app.route('/course', methods=['GET'])
-def course():
-    return render_template('course.html')
-
-
-if __name__ == '__main__':
+if __name__=='__main__':
     app.run(debug=True)
