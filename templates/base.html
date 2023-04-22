@@ -28,8 +28,13 @@
           <a class="nav-item nav-link" href="/browse">Browse Courses</a>
         </div>
         <div class="navbar-nav ml-auto">
+          {% if not session['user'] %}
           <a class="nav-item nav-link" href="/login">Login</a>
           <a class="nav-item nav-link" href="/signup">Signup</a>
+          {% else %}
+          <span class="navbar-text">{{ session['user'] }}</span>
+          <a class="nav-item nav-link" href="/logout">Logout</a>
+          {% endif %}
         </div>
       </div>
 

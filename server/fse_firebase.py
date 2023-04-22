@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+
 class Firebase:
 
     def __init__(self):
@@ -25,7 +26,7 @@ class Firebase:
 
     def get_children(self):
         return self.ref.get()
-    
+
     def get_course_details(self, coursename, term, year):
 
         children = self.get_children()
