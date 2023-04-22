@@ -32,3 +32,4 @@ six==1.16.0
 urllib3==1.26.15
 Werkzeug==2.2.3
 wrapt==1.15.0
+firebase_admin==6.1.0
