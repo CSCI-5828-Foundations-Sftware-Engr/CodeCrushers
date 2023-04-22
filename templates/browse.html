@@ -6,31 +6,23 @@
 
 {% block main %}
 
-<div class="text-center">
-    <h1>Placeholder for browsing page.</h1>
-</div>
-
-
-{% for course in data %}
-<div class="card m-2" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid rounded-start" />
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-
-                <h5 class="card-title">{{ course }}</h5>
-                <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                </p>
-                <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
+<div class="container mt-3">
+    <div class="row">
+        <div class="card-deck">
+            {% for course in data %}
+            <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
+                <img class="card-img-top" src="https://admin.marchingorder.com/uploads/2145_11aee853-b5a2-47ea-bbd7-d6a5fb1874aa.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course['Crse Title'] }}</h5>
+                    <p class="card-text">Course ID: {{ course['Sbjct'] }} {{ course['Crse'] }}<br></p>
+                    <p class="card-text">Term: {{ course['Term'] }} {{ course['Year'] }}<br></p>
+                    <p class="card-text">Instructor: {{ course['Instructor Name'] }}<br></p>
+                    <a href="/course-{{ course['Crse Title'].replace(' ', '-') + '-' + course['index'] }}" class="stretched-link"></a>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
 
-{% endfor %}
 {% endblock %}

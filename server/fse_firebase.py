@@ -33,3 +33,31 @@ class Firebase:
             if child['Crse Title'] == coursename and child['Term'] == term and child['Year'] == int(year):
                 print(child)
                 return child
+
+    def get_course_list(self, num_courses):
+        # This gets the entire dictionary of course names
+        children = self.get_children()['CourseDetails']
+
+        # Loop through num_courses and pull out the first entry
+        courses = []
+        for i, key in enumerate(children.keys()):
+            if i == num_courses:
+                break
+
+            children[key][0]['index'] = '0'
+            courses.append(children[key][0])
+
+        return courses
+
+    def get_by_course_id(self, course_id):
+        # This gets the entire dictionary of course names
+        children = self.get_children()['CourseDetails']
+
+        # Separate out coursename and index from course_id
+        course_id_tokens = course_id.split('-')
+
+        coursename = ' '
+        coursename = coursename.join(course_id_tokens[:len(course_id_tokens) - 1])
+
+        # Select by coursename then index
+        return children[coursename][int(course_id_tokens[len(course_id_tokens) - 1])]

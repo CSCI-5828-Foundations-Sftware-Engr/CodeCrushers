@@ -4,19 +4,6 @@ import pyrebase
 
 app = Flask(__name__)
 app.secret_key = "notasecretkey"
-# app.secret_key = 'pqQDrTDkEpBB8SI6rUrbclwf72TgjW3Dx0VrPObF'
-# config = {
-#     'apiKey': "AIzaSyARXlOfe51cqe05FTXqGenBHVMn4d52hk4",
-#     'authDomain': "code-crushers-84671.firebaseapp.com",
-#     'projectId': "code-crushers-84671",
-#     'storageBucket': "code-crushers-84671.appspot.com",
-#     'messagingSenderId': "1053885338598",
-#     'appId': "1:1053885338598:web:016ba75c29b3124cba7c27",
-#     'measurementId': "G-LXN6NP5MHW",
-#     'databaseURL': ''
-# }
-# firebase = pyrebase.initialize_app(config)
-# auth = firebase.auth()
 firebaseConfig = {
     'apiKey': "AIzaSyDIZ0eIPqRIN4coI_TvULQZ3m_wSXqUkZE",
     'authDomain': "codecrushers-83ba1.firebaseapp.com",
@@ -91,18 +78,16 @@ def logout():
 
 @app.route('/browse', methods=['GET'])
 def browse():
-    # Request data from firebase, get list of JSON objects
-
-    # Here's some dummy data
-    course_json = ['Fundamentals of Software Engineering', 'Advanced Graphics',
-                   'Biologically-inspired Multi-agent Systems']
-
-    return render_template('browse.html', data=course_json)
+    # Request data from firebase, get list of dictionaries
+    course_list = firebaseData.get_course_list(9)
+    return render_template('browse.html', data=course_list)
 
 
-@app.route('/course', methods=['GET'])
-def course():
-    return render_template('course.html')
+@app.route('/course-<course_id>', methods=['GET'])
+def course(course_id):
+    # course_id is course_name (hyphenated) + index
+    course_json = firebaseData.get_by_course_id(course_id)
+    return render_template('course.html', data=course_json)
 
 
 if __name__ == '__main__':
