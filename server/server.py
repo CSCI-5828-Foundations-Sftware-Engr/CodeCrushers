@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Initialize firebase
 firebase = Firebase()
-firebase.initialize()
+firebase.initialize('codecrushers-83ba1-90965a1b9d84.json')
 
 
 # Login

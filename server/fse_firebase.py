@@ -8,12 +8,12 @@ class Firebase:
         self.cred = None
         self.ref = None
 
-    def initialize(self):
+    def initialize(self, cfg_path):
 
         print('Initializing firebase...')
 
         # Fetch the service account key JSON file contents
-        self.cred = credentials.Certificate("codecrushers-83ba1-90965a1b9d84.json")
+        self.cred = credentials.Certificate(cfg_path)
 
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(self.cred, {
