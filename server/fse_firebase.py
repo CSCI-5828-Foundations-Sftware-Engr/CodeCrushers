@@ -1,6 +1,6 @@
 import firebase_admin
-from firebase_admin import credentials, db
-
+from firebase_admin import credentials
+from firebase_admin import db
 
 class Firebase:
 
@@ -8,12 +8,12 @@ class Firebase:
         self.cred = None
         self.ref = None
 
-    def initialize(self, cfg_path):
+    def initialize(self):
 
         print('Initializing firebase...')
 
         # Fetch the service account key JSON file contents
-        self.cred = credentials.Certificate(cfg_path)
+        self.cred = credentials.Certificate("codecrushers-83ba1-90965a1b9d84.json")
 
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(self.cred, {
@@ -21,43 +21,57 @@ class Firebase:
         })
 
         # Get a database reference to the Firebase Realtime Database
-        self.ref = db.reference('/')
+        self.ref = db.reference('/CourseDetails')
 
     def get_children(self):
         return self.ref.get()
+    
+    def get_course_names(self, count):
 
-    def get_course_details(self, coursename, term, year):
+        courseNames = []
+        children = list(self.get_children().keys())
+
+        newCount = int(count) if (int(count) < len(children)) else len(children)
+
+        for i in range(newCount):
+            courseNames.append(children[i])
+
+        return courseNames
+    
+    def get_course_history(self, coursename):
 
         children = self.get_children()
-        for child in children:
-            if child['Crse Title'] == coursename and child['Term'] == term and child['Year'] == int(year):
-                print(child)
-                return child
+        history = children.get(coursename, None)
+        return history
+    
+    def get_course_details(self, coursename, term, year):
 
-    def get_course_list(self, num_courses):
-        # This gets the entire dictionary of course names
-        children = self.get_children()['CourseDetails']
+        entries = []
+        children = self.get_children()
 
-        # Loop through num_courses and pull out the first entry
-        courses = []
-        for i, key in enumerate(children.keys()):
-            if i == num_courses:
-                break
+        history = children.get(coursename, None)
+        if not history:
+            return entries
+        
+        for entry in history:
+            if entry["Term"] == term and entry["Year"] == int(year):
+                entries.append(entry)
 
-            children[key][0]['index'] = '0'
-            courses.append(children[key][0])
+        return entries
+    
+    def get_course_by_id(self, courseID):
 
-        return courses
+        children = self.get_children()
 
-    def get_by_course_id(self, course_id):
-        # This gets the entire dictionary of course names
-        children = self.get_children()['CourseDetails']
+        course_id_tokens = courseID.split('-')
+        coursename = ' '.join(course_id_tokens[:len(course_id_tokens) - 1])
 
-        # Separate out coursename and index from course_id
-        course_id_tokens = course_id.split('-')
-
-        coursename = ' '
-        coursename = coursename.join(course_id_tokens[:len(course_id_tokens) - 1])
-
-        # Select by coursename then index
-        return children[coursename][int(course_id_tokens[len(course_id_tokens) - 1])]
+        child = children.get(coursename, None)
+        if child:
+            index = int(course_id_tokens[len(course_id_tokens) - 1])
+            if index < len(child):
+                return child[index]
+            else:
+                return None
+        else:
+            return None
