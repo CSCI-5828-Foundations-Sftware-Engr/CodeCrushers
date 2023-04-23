@@ -17,7 +17,7 @@
                     <p class="card-text">Course ID: {{ course['Sbjct'] }} {{ course['Crse'] }}<br></p>
                     <p class="card-text">Term: {{ course['Term'] }} {{ course['Year'] }}<br></p>
                     <p class="card-text">Instructor: {{ course['Instructor Name'] }}<br></p>
-                    <a href="/course-{{ course['Crse Title'].replace(' ', '-') + '-' + course['index'] }}" class="stretched-link"></a>
+                    <a href="/course?name=&quot;{{ course['Crse Title'].replace(' ', '-') }}&quot;&id={{ course['index'] }}" class="stretched-link"></a>
                 </div>
             </div>
             {% endfor %}

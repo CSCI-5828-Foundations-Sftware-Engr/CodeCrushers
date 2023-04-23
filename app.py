@@ -35,10 +35,6 @@ def login():
             password = request.form.get('password')
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
-            # if firebase.login_user(email, password):
-            #     session['user'] = email
-            # else:
-            #     assert False, "Could not log in, incorrect password."
             return render_template('home.html')
         except Exception as e:
             print(e)
@@ -69,7 +65,7 @@ def signup():
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    if session['user']:
+    if 'user' in session.keys():
         user_removed = session.pop('user')
         print("Logged out user: " + user_removed)
 
@@ -79,15 +75,28 @@ def logout():
 @app.route('/browse', methods=['GET'])
 def browse():
     # Request data from firebase, get list of dictionaries
-    course_list = firebaseData.get_course_list(9)
+    count = request.args.get('count')
+    course_names = firebaseData.get_course_names(count)
+    course_list = []
+    for i, name in enumerate(course_names):
+        course_list.append(firebaseData.get_course_by_id(name, 0))
+        course_list[i]['index'] = 0
+
     return render_template('browse.html', data=course_list)
 
 
-@app.route('/course-<course_id>', methods=['GET'])
-def course(course_id):
-    # course_id is course_name (hyphenated) + index
-    course_json = firebaseData.get_by_course_id(course_id)
+@app.route('/course', methods=['GET'])
+def course():
+    name = request.args.get('name').strip('"')
+    index = request.args.get('id')
+
+    course_json = firebaseData.get_course_by_id(name, index)
     return render_template('course.html', data=course_json)
+
+
+@app.route('/hello')
+def hello():
+    return 'Hello, World!'
 
 
 if __name__ == '__main__':

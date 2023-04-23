@@ -8,12 +8,12 @@ class Firebase:
         self.cred = None
         self.ref = None
 
-    def initialize(self):
+    def initialize(self, cfg_path):
 
         print('Initializing firebase...')
 
         # Fetch the service account key JSON file contents
-        self.cred = credentials.Certificate("codecrushers-83ba1-90965a1b9d84.json")
+        self.cred = credentials.Certificate(cfg_path)
 
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(self.cred, {
@@ -59,16 +59,15 @@ class Firebase:
 
         return entries
     
-    def get_course_by_id(self, courseID):
+    def get_course_by_id(self, name, index):
 
         children = self.get_children()
 
-        course_id_tokens = courseID.split('-')
-        coursename = ' '.join(course_id_tokens[:len(course_id_tokens) - 1])
+        name = name.replace('-', ' ')
 
-        child = children.get(coursename, None)
+        child = children.get(name, None)
         if child:
-            index = int(course_id_tokens[len(course_id_tokens) - 1])
+            index = int(index)
             if index < len(child):
                 return child[index]
             else:

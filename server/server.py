@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Initialize firebase
 firebase = Firebase()
-firebase.initialize()
+firebase.initialize("codecrushers-83ba1-90965a1b9d84.json")
 
 # Get coursenames
 @app.route('/getcourses', methods = ['GET'])
@@ -55,10 +55,11 @@ def coursebyid():
     if request.method == 'GET':
         
         # Read arguments
-        courseID = request.args.get('val').strip('"')
+        name = request.args.get('name').strip('"')
+        index = request.args.get('id')
 
         # Get course details by ID
-        details = firebase.get_course_by_id(courseID)
+        details = firebase.get_course_by_id(name, index)
         return jsonify(details)
     
 # Error handling

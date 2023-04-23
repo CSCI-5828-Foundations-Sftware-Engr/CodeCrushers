@@ -60,7 +60,7 @@ class TestServer(unittest.TestCase):
 
     def test_courseId(self):
 
-        response = self.app.get('/courseid?val="Advanced-Operating-Systems-0"')
+        response = self.app.get('/courseid?name="Advanced-Computer-Graphics"&id=0')
         self.assertEqual(response.status_code, 200)
 
         responseJson = json.loads(response.data)
@@ -70,7 +70,7 @@ class TestServer(unittest.TestCase):
 
     def test_courseId1(self):
 
-        response = self.app.get('/courseid?val="None-0"')
+        response = self.app.get('/courseid?name="None"&id=0')
         self.assertEqual(response.status_code, 200)
 
         responseJson = json.loads(response.data)
