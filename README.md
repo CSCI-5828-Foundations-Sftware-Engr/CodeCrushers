@@ -20,6 +20,13 @@ Login:
 <br>
 ![image](https://user-images.githubusercontent.com/72016598/227109438-36dad689-9c69-43af-bd85-5ac7d7ed445c.png)
 ![image](https://user-images.githubusercontent.com/72016598/227109511-2f7123b4-99a9-46ed-bc32-0fd895d7d8fd.png)
+<br>
+Server Response:
+<br>
+![image](https://user-images.githubusercontent.com/81984166/233821404-a6a64317-ab41-41bf-ace3-2360e27257d8.png)
+![image](https://user-images.githubusercontent.com/81984166/233821472-4fc1407b-c434-4ec5-87bc-70a0b4eb42df.png)
+![image](https://user-images.githubusercontent.com/81984166/233821510-fe960195-f230-4a0d-9dfb-08c904834887.png)
+![image](https://user-images.githubusercontent.com/81984166/233821563-d0688a49-3560-48e2-991f-f25f34991ca2.png)
 
 
 ### User Stories (Jira):
