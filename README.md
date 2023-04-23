@@ -30,6 +30,27 @@ https://csci5828-codecrushers.atlassian.net/jira/software/projects/C5FP/boards/1
 ![image](https://user-images.githubusercontent.com/72016598/227109710-cb426a50-25d1-448d-a50d-d3756025b1bf.png)
 ![image](https://user-images.githubusercontent.com/72016598/227109817-2f23b3aa-4425-488f-a4cf-98d4725fe3ed.png)
 
+### Testing
+
+#### Unit Testing
+
+**Server**
+
+The unit tests for the server application have been written using the Python "**unittest**" framework.
+
+The current unit test cases are as follows:
+* Get single course details using name, term and year
+* Get k course names (k <= number of courses in database)
+* Get k course names (k > number of courses in database)
+* Get course history based on the course name
+* Get course history based on invalid course name
+* Get course details using correct id
+* Get course details using invalid id
+
+Screenshots:
+
+![image](https://user-images.githubusercontent.com/81984166/233821310-78e6fff7-8733-44ca-8ea8-66ca1c6f76a8.png)
+
 
 ### Gantt Chart:
 ![image](https://user-images.githubusercontent.com/72016598/227111708-27ace4ff-1e8d-4df0-a058-fa7ed62410b0.png)
