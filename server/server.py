@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from fse_firebase import *
 
 app = Flask(__name__)
@@ -7,25 +7,23 @@ app = Flask(__name__)
 firebase = Firebase()
 firebase.initialize("codecrushers-83ba1-90965a1b9d84.json")
 
+
 # Get coursenames
-@app.route('/getcourses', methods = ['GET'])
+@app.route('/getcourses', methods=['GET'])
 def getcourses():
-    
     if request.method == 'GET':
-        
         # Read arguments
         count = request.args.get('count').strip('"')
 
         # Get course list
         courseNames = firebase.get_course_names(count)
         return jsonify(courseNames)
-    
+
+
 # Get course history
-@app.route('/coursehistory', methods = ['GET'])
+@app.route('/coursehistory', methods=['GET'])
 def coursehistory():
-    
     if request.method == 'GET':
-        
         # Read arguments
         name = request.args.get('name').strip('"')
 
@@ -33,12 +31,11 @@ def coursehistory():
         courseHistory = firebase.get_course_history(name)
         return jsonify(courseHistory)
 
+
 # Specific course details
-@app.route('/coursedetails', methods = ['GET'])
+@app.route('/coursedetails', methods=['GET'])
 def coursedetails():
-    
     if request.method == 'GET':
-        
         # Read arguments
         name = request.args.get('name').strip('"')
         term = request.args.get('term').strip('"')
@@ -48,12 +45,11 @@ def coursedetails():
         details = firebase.get_course_details(name, term, year)
         return jsonify(details)
 
+
 # Get course by ID
-@app.route('/courseid', methods = ['GET'])
+@app.route('/courseid', methods=['GET'])
 def coursebyid():
-    
     if request.method == 'GET':
-        
         # Read arguments
         name = request.args.get('name').strip('"')
         index = request.args.get('id')
@@ -61,11 +57,14 @@ def coursebyid():
         # Get course details by ID
         details = firebase.get_course_by_id(name, index)
         return jsonify(details)
-    
+
+
 # Error handling
 @app.errorhandler
 def error_handling():
     return None
 
+
 # Run the flask app
-app.run()
+if __name__ == '__main__':
+    app.run()
