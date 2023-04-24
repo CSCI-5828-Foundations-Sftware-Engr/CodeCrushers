@@ -91,6 +91,7 @@ def course():
     index = request.args.get('id')
 
     course_json = firebaseData.get_course_by_id(name, index)
+    print(course_json)
     return render_template('course.html', data=course_json)
 
 
