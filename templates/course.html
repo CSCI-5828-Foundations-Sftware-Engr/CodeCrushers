@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Code Crushers - Course{% endblock %}
@@ -6,8 +7,94 @@
 
 {% block main %}
 
-<div class="text-center">
-    <h1>Placeholder for course detail and feedback page.</h1>
+
+<div style="width: 100%;">
+    <div style="width: 50%; height: 100px; float: left; margin-top: 10px; margin-left: 10px;"> 
+        
+        <div style ="margin-top: 20px; margin-left: 20px; ">
+        <h3>{{ data['Crse Title'] }}</h3>
+        <p >Course ID: {{ data['Sbjct'] }} {{ data['Crse'] }}<br></p>
+        <p >Term: {{ data['Term'] }} {{ data['Year'] }}<br></p>
+        <p >Instructor: {{ data['Instructor Name'] }}<br></p>
+        <p >Course Level: {{ data['Crse Lvl'] }}<br></p>
+        <p >Campus: {{ data['Campus'] }}<br></p>
+        
+    </script>
+        
+        </div>
+    </div>
+    </div>
+    <div style="margin-left: 50%; height: 100px;"> 
+        Right Div
+        <img src="https://admin.marchingorder.com/uploads/2145_11aee853-b5a2-47ea-bbd7-d6a5fb1874aa.png" alt="Card image cap" style="width:450px;height:90px;">
+        <textarea id="title"> </textarea>
+        <button id="btn"> Comment </button>  
+        <!-- <p id="title"></p> -->
+        <!--<input type="hidden" name="course_name" value="{{ data['Crse Title'] }}"> -->
+        <!-- <form action="/course" method="post">
+            <input type="hidden" name="course_name" value="{{ data['Crse Title'] }}">
+            <input name="comment" type="text">
+            <button type="submit"> Post</button>
+    
+            
+        </form> -->
+    </div>
 </div>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIZ0eIPqRIN4coI_TvULQZ3m_wSXqUkZE",
+      authDomain: "codecrushers-83ba1.firebaseapp.com",
+      databaseURL: "https://codecrushers-83ba1-default-rtdb.firebaseio.com",
+      projectId: "codecrushers-83ba1",
+      storageBucket: "codecrushers-83ba1.appspot.com",
+      messagingSenderId: "611473793281",
+      appId: "1:611473793281:web:f2fa45a46286a1fed6fb00",
+      measurementId: "G-6JX1R48Z3J"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    import {getDatabase, ref, get, set, child, update, remove}
+    from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+    const db = getDatabase();
+    var title = document.querySelector("#title");
+    var btn = document.querySelector("#btn");
+    var data= {{ data | safe  }};
+    console.log(data);
+    console.log(data['Crse Title']);
+    
+    function FindData(){
+        const dbref = ref(db);
+
+        get(child(dbref,"CourseDetails/"+ data['Crse Title'] + '/0'))
+        .then((snapshot)=>{
+            if(snapshot.exists()){
+                title.innerHTML = "Title" + snapshot.val().data;
+            }
+            else{
+                alert("No data found");
+            }
+        })
+        
+      
+    }
+    // function comment(){
+        
+    //     const dbref = ref(db);
+    // }
+    btn.addEventListener('click',FindData);
+
+  </script>
+
 
 {% endblock %}
