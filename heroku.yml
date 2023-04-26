@@ -1,0 +1,5 @@
+build:
+  docker:
+    server: server/Dockerfile.server
+    worker: worker/Dockerfile.worker
+    rabbitmq: Dockerfile.rabbitmq
