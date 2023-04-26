@@ -58,6 +58,17 @@ def coursebyid():
         details = firebase.get_course_by_id(name, index)
         return jsonify(details)
 
+@app.route('/comments',methods=['GET'])
+def comments():
+    if request.method == 'GET':
+        # Read arguments
+        name = request.args.get('name').strip('"')
+        index = request.args.get('id')
+
+        # Get course details by ID
+        details = firebase.get_course_by_id(name, index)
+        comments=details['Comments']
+        return jsonify(comments)
 
 # Error handling
 @app.errorhandler

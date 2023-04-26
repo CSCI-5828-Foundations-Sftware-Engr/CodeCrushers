@@ -85,14 +85,32 @@ def browse():
     return render_template('browse.html', data=course_list)
 
 
-@app.route('/course', methods=['GET'])
+@app.route('/course', methods=['GET','POST'])
 def course():
-    name = request.args.get('name').strip('"')
-    index = request.args.get('id')
+    flag = 0
+    if request.method == "POST":
+        comment = request.form['comment']
+        name = request.form['course_name']
+        index = 0
+        flag = 1
+        course_json = firebaseData.get_course_by_id(name, index)
+        comments = firebaseData.get_course_by_id(name, index)['Comments']
+        print(comment)
+        comments.append(comment)
+        firebaseData.ref.child(name+'/').child('0/').child("Comments/").set(comments)
+        
 
-    course_json = firebaseData.get_course_by_id(name, index)
-    print(course_json)
-    return render_template('course.html', data=course_json)
+    if flag == 0:
+        name = request.args.get('name').strip('"')
+        index = request.args.get('id')
+    ## RETRIEVE COMMENTS FOR COURSE_NAME
+    ## comments = firbase_dictionary['comments']
+
+
+        course_json = firebaseData.get_course_by_id(name, index)
+        comments = course_json['Comments']
+        #print(comments)
+    return render_template('course.html', data=course_json, comments=comments)
 
 
 @app.route('/hello')
