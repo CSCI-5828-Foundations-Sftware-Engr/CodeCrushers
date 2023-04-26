@@ -1,5 +1,9 @@
+from flask import Flask, render_template, request
+import pika
+import os, sys
+
 from flask import Flask, render_template, url_for, request, redirect, session
-from server.fse_firebase import Firebase
+from firebase import Firebase
 import pyrebase
 
 app = Flask(__name__)
@@ -18,7 +22,7 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 
 firebaseData = Firebase()
-firebaseData.initialize("server/codecrushers-83ba1-90965a1b9d84.json")
+firebaseData.initialize("firebase_cfg.json")
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -74,7 +78,7 @@ def logout():
 
 @app.route('/browse', methods=['GET'])
 def browse():
-    # Request data from firebase, get list of dictionaries
+    # Request data from firebase.py, get list of dictionaries
     count = request.args.get('count')
     course_names = firebaseData.get_course_names(count)
     course_list = []
@@ -85,13 +89,33 @@ def browse():
     return render_template('browse.html', data=course_list)
 
 
-@app.route('/course', methods=['GET'])
+@app.route('/course', methods=['GET', 'POST'])
 def course():
-    name = request.args.get('name').strip('"')
-    index = request.args.get('id')
+    flag = 0
+    if request.method == "POST":
+        comment = request.form['comment']
+        command = f'curl localhost:5000/add-job/{comment}'
+        res = os.system(command)
+        print("RES: ", res)
+        name = request.form['course_name']
+        index = 0
+        flag = 1
+        course_json = firebaseData.get_course_by_id(name, index)
+        comments = firebaseData.get_course_by_id(name, index)['Comments']
+        print(comment)
+        comments.append(comment)
+        firebaseData.ref.child(name + '/').child('0/').child("Comments/").set(comments)
 
-    course_json = firebaseData.get_course_by_id(name, index)
-    return render_template('course.html', data=course_json)
+    if flag == 0:
+        name = request.args.get('name').strip('"')
+        index = request.args.get('id')
+        ## RETRIEVE COMMENTS FOR COURSE_NAME
+        ## comments = firbase_dictionary['comments']
+
+        course_json = firebaseData.get_course_by_id(name, index)
+        comments = course_json['Comments']
+        # print(comments)
+    return render_template('course.html', data=course_json, comments=comments)
 
 
 @app.route('/hello')
@@ -99,5 +123,40 @@ def hello():
     return 'Hello, World!'
 
 
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        # Get the data from the form
+        data = request.form['data']
+        print("DATAAAAAA: ", data)
+        command = f'curl localhost:5000/add-job/{data}'
+        # Run the curl command
+        try:
+            res = os.system(command)
+            print("RES: ", res)
+            print("EXECUTED command")
+        except:
+            print("NOT FOUNDDDDDDDDDDDDDD")
+        # Return a success message
+
+    return render_template("index.html")
+
+
+@app.route('/add-job/<cmd>')
+def add(cmd):
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
+    channel = connection.channel()
+    channel.queue_declare(queue='task_queue', durable=True)
+    channel.basic_publish(
+        exchange='',
+        routing_key='task_queue',
+        body=cmd,
+        properties=pika.BasicProperties(
+            delivery_mode=2,  # make message persistent
+        ))
+    connection.close()
+    return " [x] Sent: %s" % cmd
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

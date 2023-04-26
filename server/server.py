@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify
-from fse_firebase import *
+from firebase import *
 
 app = Flask(__name__)
 
 # Initialize firebase
 firebase = Firebase()
-firebase.initialize("codecrushers-83ba1-90965a1b9d84.json")
+firebase.initialize("firebase_cfg.json")
 
 
 # Get coursenames

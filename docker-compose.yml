@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
+  worker:
+    build:
+      context: worker
+      dockerfile: Dockerfile.worker
+    volumes:
+      - ./worker:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  server:
+    build:
+      context: server
+      dockerfile: Dockerfile.server
+    volumes:
+      - ./server:/app
+    ports:
+      - 5000:5000

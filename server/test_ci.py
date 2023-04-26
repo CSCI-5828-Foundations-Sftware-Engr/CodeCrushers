@@ -1,9 +1,7 @@
 import pyrebase
-import requests
 import pytest
-from flask import Flask, session
 
-from server.fse_firebase import Firebase
+from firebase import Firebase
 from app import app
 
 
@@ -41,7 +39,7 @@ def auth():
 @pytest.fixture()
 def db():
     db = Firebase()
-    db.initialize("server/codecrushers-83ba1-90965a1b9d84.json")
+    db.initialize("firebase_cfg.json")
     return db
 
 

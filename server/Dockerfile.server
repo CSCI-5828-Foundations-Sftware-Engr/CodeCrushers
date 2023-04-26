@@ -1,0 +1,34 @@
+FROM ubuntu:18.04
+
+RUN apt-get update -y && \
+    apt-get install -y python3-pip python3-dev
+
+RUN apt-get install -y curl
+
+
+COPY ./requirements.txt /app/requirements.txt
+
+WORKDIR /app
+
+RUN pip3 install --upgrade --ignore-installed pip setuptools
+RUN pip3 install pika
+RUN pip3 install -r requirements.txt
+RUN pip3 install click
+RUN pip3 install colorama
+RUN pip3 install setuptools-rust
+RUN pip3 install flask
+RUN pip3 install googleapis-common-protos
+RUN pip3 install itsdangerous
+RUN pip3 install jinja2
+RUN pip3 install MarkupSafe
+RUN pip3 install protobuf
+RUN pip3 install pytest
+RUN pip3 install requests
+RUN pip3 install Werkzeug
+RUN pip3 install firebase_admin
+
+COPY . /app
+
+ENTRYPOINT [ "python3" ]
+
+CMD [ "app.py" ]
