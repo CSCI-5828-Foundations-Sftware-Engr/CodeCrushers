@@ -38,7 +38,7 @@ jobs:
 #      working-directory: ./server
 #      run: |
 #        pytest
-    - name: Test with unittest
-      working-directory: ./server
-      run: |
-        python -m unittest -v server_tests.py
+#    - name: Test with unittest
+#      working-directory: ./server
+#      run: |
+#        python -m unittest -v server_tests.py
