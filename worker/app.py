@@ -15,9 +15,8 @@ print(' [*] Waiting for messages.')
 
 
 def callback(ch, method, properties, body):
-    print(" [x] Received %s" % body)
+    print(" [x] Message Received %s" % body)
     cmd = body.decode()
-    print(" Message recieved")
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
