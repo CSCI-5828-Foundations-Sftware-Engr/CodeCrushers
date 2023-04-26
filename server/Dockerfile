@@ -10,8 +10,22 @@ COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN pip3 install pika 
-RUN pip3 install -r requirements.txt 
+RUN pip3 install --upgrade --ignore-installed pip setuptools
+RUN pip3 install pika
+RUN pip3 install -r requirements.txt
+RUN pip3 install click
+RUN pip3 install colorama
+RUN pip3 install setuptools-rust
+RUN pip3 install flask
+RUN pip3 install googleapis-common-protos
+RUN pip3 install itsdangerous
+RUN pip3 install jinja2
+RUN pip3 install MarkupSafe
+RUN pip3 install protobuf
+RUN pip3 install pytest
+RUN pip3 install requests
+RUN pip3 install Werkzeug
+RUN pip3 install firebase_admin
 
 COPY . /app
 
