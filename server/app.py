@@ -125,23 +125,23 @@ def hello():
     return 'Hello, World!'
 
 
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
+# @app.route('/index', methods=['GET', 'POST'])
+#def index():
+    #if request.method == 'POST':
         # Get the data from the form
-        data = request.form['data']
-        print("DATAAAAAA: ", data)
-        command = f'curl localhost:5000/add-job/{data}'
+        #data = request.form['data']
+       # print("DATAAAAAA: ", data)
+      #  command = f'curl localhost:5000/add-job/{data}'
         # Run the curl command
-        try:
-            res = os.system(command)
-            print("RES: ", res)
-            print("EXECUTED command")
-        except:
-            print("NOT FOUNDDDDDDDDDDDDDD")
+     #   try:
+    #        res = os.system(command)
+   #         print("RES: ", res)
+  #          print("EXECUTED command")
+ #       except:
+#            print("NOT FOUNDDDDDDDDDDDDDD")
         # Return a success message
         
-    return render_template("index.html")
+#    return render_template("index.html")
 
 
 @app.route('/add-job/<cmd>')
@@ -157,7 +157,7 @@ def add(cmd):
             delivery_mode=2,  # make message persistent
         ))
     connection.close()
-    return " [x] Sent: %s" % cmd
+    return " [x]The comment posted is: %s" % cmd
 
 
 if __name__ == '__main__':
