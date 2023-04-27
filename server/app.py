@@ -125,8 +125,8 @@ def hello():
     return 'Hello, World!'
 
 
-# @app.route('/index', methods=['GET', 'POST'])
-#def index():
+@app.route('/index', methods=['GET', 'POST'])
+def index():
     #if request.method == 'POST':
         # Get the data from the form
         #data = request.form['data']
@@ -141,7 +141,7 @@ def hello():
 #            print("NOT FOUNDDDDDDDDDDDDDD")
         # Return a success message
         
-#    return render_template("index.html")
+return render_template("index.html")
 
 
 @app.route('/add-job/<cmd>')
