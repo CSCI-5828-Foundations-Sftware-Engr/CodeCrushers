@@ -21,6 +21,7 @@ def update_database():
     
     # Update in firebase
     ref = db.reference('/CourseDetails')
+    ref.set(responseJson["CourseDetails"])
 
 # Schedule the function to run every hour
 schedule.every(30).minutes.do(update_database)
