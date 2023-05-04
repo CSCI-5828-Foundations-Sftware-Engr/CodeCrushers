@@ -16,7 +16,7 @@ def update_database():
     print('Updating DB')
 
     # Fetch data from provider
-    response = requests.get('http://127.0.0.1:5000/dataprovider')
+    response = requests.get('http://127.0.0.1:3000/dataprovider')
     responseJson = json.loads(response.content)
     
     # Update in firebase
@@ -26,6 +26,10 @@ def update_database():
 # Schedule the function to run every hour
 schedule.every(30).minutes.do(update_database)
 
+time.sleep(30)
+update_database()
+print("Collected course details.")
 while True:
     schedule.run_pending()
+    print("Collected course details.")
     time.sleep(1)

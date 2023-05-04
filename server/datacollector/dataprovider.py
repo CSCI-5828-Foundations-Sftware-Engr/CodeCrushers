@@ -6,7 +6,6 @@ app = Flask(__name__)
 # Provide course details
 @app.route('/dataprovider', methods = ['GET'])
 def coursedetails():
-    
     if request.method == 'GET':
 
         # Get course details
@@ -22,4 +21,4 @@ def error_handling():
 
 
 # Run the flask app
-app.run()
+app.run(host='127.0.0.1', port=3000)
