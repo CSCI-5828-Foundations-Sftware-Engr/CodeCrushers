@@ -1,8 +1,8 @@
 import unittest
+from unittest import mock
 import json
-import sys
-import os
 from server import app
+import requests
 
 class TestServer(unittest.TestCase):
 
@@ -10,6 +10,23 @@ class TestServer(unittest.TestCase):
         app.testing = True
         self.app = app.test_client()
         self.testCount = 1
+
+    def test_mockData(self):
+
+        with mock.patch('requests.get') as mock_get:
+
+            # Set up mock object
+            mock_get.return_value.json.return_value = {'coursename': 'Analysis of Mock'}
+        
+            # Fetch data with test URL
+            data = requests.get('https://127.0.0.1:5000/mockdata').json()
+        
+            # Assertions
+            assert data == {'coursename': 'Analysis of Mock'}
+            mock_get.assert_called_with('https://127.0.0.1:5000/mockdata')
+
+            print('Mock test passed!')
+
 
     def test_singleCourse(self):
         response = self.app.get('/coursedetails?name="Advanced Computer Graphics"&term="Spring"&year=2022')
