@@ -79,20 +79,21 @@ def logout():
 
 @app.route('/browse', methods=['GET'])
 def browse():
+    # Request data from firebase.py, get list of dictionaries
     count = request.args.get('count')
     course_names = firebaseData.get_course_names(count)
     course_list = []
-    comment_counts = {}
     for i, name in enumerate(course_names):
         course_list.append(firebaseData.get_course_by_id(name, 0))
-        comment_counts[name] = len(firebaseData.get_course_by_id(name, 0)['Comments'])
         course_list[i]['index'] = 0
+    comment_counts = firebaseData.get_comments()
+    for title in comment_counts.keys():
+        comment_counts[title] = len(comment_counts[title])
     top_3 = sorted(comment_counts, key=lambda x: comment_counts[x], reverse=True)[:3]
     top_3_courses = {}
     for c in top_3:
         top_3_courses[c] = comment_counts[c]
-    idx = 0
-
+    idx = 0 
     return render_template('browse.html', data=course_list, comment_counts=top_3_courses, idx=idx)
 
 
@@ -170,4 +171,4 @@ def add(cmd):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=5000)
