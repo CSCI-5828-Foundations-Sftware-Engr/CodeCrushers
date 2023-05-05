@@ -31,6 +31,4 @@ RUN pip3 install firebase_admin
 
 COPY . /app
 
-#ENTRYPOINT [ "python3" ]
-
 ENTRYPOINT [ "./run.sh" ]

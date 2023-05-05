@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request
 import pika
-import os, sys
+import os
 
-from flask import Flask, render_template, url_for, request, redirect, session
-from firebase import Firebase
+import pika
 import pyrebase
+from flask import Flask, render_template, request, session
+
+from firebase import Firebase
 
 app = Flask(__name__)
 app.secret_key = "notasecretkey"
