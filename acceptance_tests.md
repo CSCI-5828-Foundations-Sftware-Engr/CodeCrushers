@@ -25,6 +25,8 @@
 - Fetching relevant data
 - Precisely sending it back to the application
 
-## Test 6:
+## Test 6: Data Collector
+- Checking if the data fetched is relevant
+- Checking if its running in the background continuously
 
 ## Test 7:
