@@ -98,13 +98,13 @@ def course():
         res = os.system(command)
         print("RES: ", res)
         name = request.form['course_name']
+        name = name.replace(' ', '-')
         index = 0
         flag = 1
         course_json = firebaseData.get_course_by_id(name, index)
-        comments = firebaseData.get_course_by_id(name, index)['Comments']
-        print(comment)
+        comments = firebaseData.get_comments()[name]
         comments.append(comment)
-        firebaseData.ref.child(name + '/').child('0/').child("Comments/").set(comments)
+        firebaseData.ref1.child(name + '/').set(comments)
 
     if flag == 0:
         name = request.args.get('name').strip('"')
