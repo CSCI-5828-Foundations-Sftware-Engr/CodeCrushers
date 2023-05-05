@@ -26,7 +26,7 @@
 - Precisely sending it back to the application
 
 ## Test 6: Data Collector
-- Checking if the data fetched is relevant
-- Checking if its running in the background continuously
+- Checking if the database is updated correctly
+- Checking if its running in the background every 30 minutes
 
 ## Test 7:
