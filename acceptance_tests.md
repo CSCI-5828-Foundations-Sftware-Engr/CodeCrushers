@@ -27,6 +27,6 @@
 
 ## Test 6: Data Collector
 - Checking if the database is updated correctly
-- Checking if its running in the background every 30 minutes
+- Checking if it updates the database every 30 minutes
 
 ## Test 7:
