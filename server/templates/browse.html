@@ -9,6 +9,18 @@
 <div class="container mt-3">
     <div class="row">
         <div class="card-deck">
+            <h3>Top 3 Courses by #Comments</h3><br>
+            {% for key, val in comment_counts.items() %}
+            <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
+                <img class="card-img-top" src="https://admin.marchingorder.com/uploads/2145_11aee853-b5a2-47ea-bbd7-d6a5fb1874aa.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ key }}</h5>
+                    <p class="card-text">Comments Counts: {{ val }}<br></p>
+                    <a href="/course?name=&quot;{{ key.replace(' ', '-') }}&quot;&id={{ idx }}" class="stretched-link"></a>
+                </div>
+            </div>
+            {% endfor %}
+            <br><br><br>
             {% for course in data %}
             <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
                 <img class="card-img-top" src="https://admin.marchingorder.com/uploads/2145_11aee853-b5a2-47ea-bbd7-d6a5fb1874aa.png" alt="Card image cap">
