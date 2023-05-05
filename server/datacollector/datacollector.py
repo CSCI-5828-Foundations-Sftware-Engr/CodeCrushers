@@ -16,7 +16,7 @@ def update_database():
     print('Updating DB')
 
     # Fetch data from provider
-    response = requests.get('http://127.0.0.1:3000/dataprovider')
+    response = requests.get('http://0.0.0.0:3000/dataprovider')
     responseJson = json.loads(response.content)
     
     # Update in firebase
