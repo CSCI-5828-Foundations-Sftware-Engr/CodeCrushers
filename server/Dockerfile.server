@@ -19,6 +19,7 @@ RUN pip3 install click
 RUN pip3 install colorama
 RUN pip3 install setuptools-rust
 RUN pip3 install flask
+RUN pip3 install flask-cors
 RUN pip3 install googleapis-common-protos
 RUN pip3 install itsdangerous
 RUN pip3 install jinja2

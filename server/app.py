@@ -1,9 +1,12 @@
+import json
+
 import pika
 import os
 
 import pika
 import pyrebase
 from flask import Flask, render_template, request, session
+import requests
 
 from firebase import Firebase
 
@@ -171,4 +174,4 @@ def add(cmd):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

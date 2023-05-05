@@ -1,11 +1,11 @@
-from server.firebase import Firebase
+from firebase import Firebase
 from flask import Flask, render_template, redirect, url_for, jsonify
 import pyrebase
 from collections import OrderedDict
 from flask_cors import CORS
 
 firebaseData = Firebase()
-firebaseData.initialize("server/firebase_cfg.json")
+firebaseData.initialize("firebase_cfg.json")
 
 app = Flask(__name__)
 app.secret_key = "notasecretkey1"
@@ -36,4 +36,4 @@ def home():
     return redirect(url_for('analyze'))
 
 if __name__ == '__main__':
-    app.run(port=5001)
+    app.run(host='0.0.0.0', port=5001)
