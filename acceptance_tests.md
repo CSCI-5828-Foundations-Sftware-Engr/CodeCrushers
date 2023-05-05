@@ -15,7 +15,10 @@
 - Can see their email username in the navigation bar after logging in
 - Will be redirected when inputting incorrect login information
 
-## Test 4:
+## Test 4: Comment Section:
+- Verify whether comments are being displayed
+- Checking if the comments are being pushed to Database
+- Verifying if the new comments can be seen on the application
 
 ## Test 5:
 
