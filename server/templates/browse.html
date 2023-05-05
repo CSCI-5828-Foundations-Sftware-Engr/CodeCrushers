@@ -9,7 +9,7 @@
 <div class="container mt-3">
     <div class="row">
         <h3>Top 3 Courses by #Comments:</h3><br>
-        <div class="card-deck">
+        <!--<div class="card-deck">
             {% for key, val in comment_counts.items() %}
             <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
                 <img class="card-img-top" src="https://admin.marchingorder.com/uploads/2145_11aee853-b5a2-47ea-bbd7-d6a5fb1874aa.png" alt="Card image cap">
@@ -20,7 +20,10 @@
                 </div>
             </div>
             {%endfor%}
-        </div>
+        </div>-->
+
+        <ul id="data-list"></ul>
+
     </div> 
         <h3>All Courses:</h3><br>
         <div class="card-deck">
@@ -39,5 +42,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:5001/');
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var data = xhr.response;
+            console.log(data);
+            data.forEach(function(item) {
+                var li = document.createElement('li');
+                li.innerHTML = "Coursename: " + item[0] + " #Comments: " + item[1];
+                document.getElementById('data-list').appendChild(li);
+            });
+        }
+        else {
+            console.log('Error retrieving data from API');
+        }
+    };
+    xhr.send();
+</script>
 
 {% endblock %}
