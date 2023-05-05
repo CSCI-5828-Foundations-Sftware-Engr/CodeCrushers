@@ -12,24 +12,16 @@ https://github.com/CSCI-5828-Foundations-Sftware-Engr/CodeCrushers/wiki/Project-
 https://codecrushers.herokuapp.com/
 
 ### Screenshots of the Web Application:
-![image](https://user-images.githubusercontent.com/72016598/227109099-de0bf6c3-6071-4224-b6d7-521ede5de4a6.png)
+![image](https://user-images.githubusercontent.com/48272144/236381106-42fa5df0-3d97-430f-a4d3-d2416a71251a.png)
 <br>
 Signup:
 <br>
-![image](https://user-images.githubusercontent.com/72016598/227109221-203a21e9-8cb2-4bb4-bbee-56e291637e76.png)
-![image](https://user-images.githubusercontent.com/72016598/227109271-46c115fe-42e3-4ed4-9226-e4e6dc01a9ff.png)
+![image](https://user-images.githubusercontent.com/48272144/236381411-0ca6f06d-cafa-4e0e-8975-461745a0ae68.png)
 <br>
 Login:
 <br>
-![image](https://user-images.githubusercontent.com/72016598/227109438-36dad689-9c69-43af-bd85-5ac7d7ed445c.png)
-![image](https://user-images.githubusercontent.com/72016598/227109511-2f7123b4-99a9-46ed-bc32-0fd895d7d8fd.png)
+![image](https://user-images.githubusercontent.com/48272144/236381209-634e55b5-3f92-434f-824c-e93c30582d32.png)
 <br>
-Server Response:
-<br>
-![image](https://user-images.githubusercontent.com/81984166/233821404-a6a64317-ab41-41bf-ace3-2360e27257d8.png)
-![image](https://user-images.githubusercontent.com/81984166/233821472-4fc1407b-c434-4ec5-87bc-70a0b4eb42df.png)
-![image](https://user-images.githubusercontent.com/81984166/233821510-fe960195-f230-4a0d-9dfb-08c904834887.png)
-![image](https://user-images.githubusercontent.com/81984166/233821563-d0688a49-3560-48e2-991f-f25f34991ca2.png)
 
 
 ### User Stories (Jira):
