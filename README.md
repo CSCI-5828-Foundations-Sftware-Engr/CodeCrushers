@@ -5,6 +5,9 @@
 - Noah James
 - Surya Kanteti
 
+### Project Rubrics
+https://github.com/CSCI-5828-Foundations-Sftware-Engr/CodeCrushers/wiki/Project-Rubric
+
 ### Public Accessible URL :
 https://codecrushers.herokuapp.com/
 
@@ -61,6 +64,3 @@ Screenshots:
 
 ### Gantt Chart:
 ![image](https://user-images.githubusercontent.com/72016598/227111708-27ace4ff-1e8d-4df0-a058-fa7ed62410b0.png)
-
-### Project Rubrics
-https://github.com/CSCI-5828-Foundations-Sftware-Engr/CodeCrushers/wiki/Project-Rubric
