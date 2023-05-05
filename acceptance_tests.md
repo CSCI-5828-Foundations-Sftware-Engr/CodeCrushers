@@ -20,7 +20,10 @@
 - Checking if the comments are being pushed to Database
 - Verifying if the new comments can be seen on the application
 
-## Test 5:
+## Test 5: Data Analyzer
+- Verifying if the data analyzer is connecting to the database correctly
+- Fetching relevant data
+- Precisely sending it back to the application
 
 ## Test 6:
 
