@@ -22,6 +22,7 @@ class Firebase:
 
         # Get a database reference to the Firebase Realtime Database
         self.ref = db.reference('/CourseDetails')
+        self.ref1 = db.reference('/Comments')
 
     def get_children(self):
         return self.ref.get()
@@ -74,3 +75,5 @@ class Firebase:
                 return None
         else:
             return None
+    def get_comments(self):
+        return self.ref1.get()
