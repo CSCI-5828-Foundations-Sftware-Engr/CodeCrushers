@@ -86,7 +86,9 @@ def browse():
         course_list.append(firebaseData.get_course_by_id(name, 0))
         comment_counts[name] = len(firebaseData.get_course_by_id(name, 0)['Comments'])
         course_list[i]['index'] = 0
-    
+    top_3 = sorted(comment_counts, key=lambda x: comment_counts[x], reverse=True)[:3]
+    top_3_courses = {}
+
 
     return render_template('browse.html', data=course_list, comment_counts=top_3_courses, idx=idx)
 
