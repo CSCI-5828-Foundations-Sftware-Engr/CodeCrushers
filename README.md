@@ -8,6 +8,9 @@
 ### Project Rubrics
 https://github.com/CSCI-5828-Foundations-Sftware-Engr/CodeCrushers/wiki/Project-Rubric
 
+### Video Demo
+[Google Drive](https://drive.google.com/file/d/1-BZvZDFStT6gn1uiFSACYXasrwBBnQcP/view?usp=sharing)
+
 ### Public Accessible URL :
 https://codecrushers.herokuapp.com/
 
