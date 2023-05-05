@@ -98,12 +98,15 @@ def course():
         res = os.system(command)
         print("RES: ", res)
         name = request.form['course_name']
+        #changing name to get the name similar as database
         name = name.replace(' ', '-')
         index = 0
         flag = 1
         course_json = firebaseData.get_course_by_id(name, index)
         comments = firebaseData.get_comments()[name]
+        #appending the comments
         comments.append(comment)
+        #referencing the database
         firebaseData.ref1.child(name + '/').set(comments)
 
     if flag == 0:
@@ -112,7 +115,7 @@ def course():
         ## RETRIEVE COMMENTS FOR COURSE_NAME
         ## comments = firbase_dictionary['comments']
         course_json = firebaseData.get_course_by_id(name, index)
-        
+        #referencing the database
         comments = firebaseData.get_comments()[name]
         #comments = course_json['Comments']
         # print(comments)
