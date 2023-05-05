@@ -111,9 +111,10 @@ def course():
         index = request.args.get('id')
         ## RETRIEVE COMMENTS FOR COURSE_NAME
         ## comments = firbase_dictionary['comments']
-
         course_json = firebaseData.get_course_by_id(name, index)
-        comments = course_json['Comments']
+        
+        comments = firebaseData.get_comments()[name]
+        #comments = course_json['Comments']
         # print(comments)
     return render_template('course.html', data=course_json, comments=comments)
 
